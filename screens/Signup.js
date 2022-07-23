@@ -22,11 +22,9 @@ export default function Signup({navigation}) {
         autoComplete="password"
         />
 
-        <CustomButton title="Sign Up" color="#FE9D34" navigation={navigation}
-        press = "Login"
-        />
+        <CustomButton title="Sign Up" color="#FE9D34" navigation={navigation}/>
         <CustomButton title="Have already account?" color="#FF5621" navigation={navigation}
-        press = "Login"
+        press = {() => navigation.navigate('Login')}
         />
     </View>
   )

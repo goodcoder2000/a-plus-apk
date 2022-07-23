@@ -298,9 +298,11 @@ export const Gstyles = StyleSheet.create({
         padding: 10,
         // height: 40,
         fontFamily: 'poppins-r',
-        fontSize: 20,
+        fontSize: 15,
         marginBottom: 20,
-        borderRadius: 8
+        borderRadius: 8,
+        color: "#fff",
+        backgroundColor: 'rgba(51,51,51,0.6)'
     },
     loginCon: {
         paddingHorizontal: 10,

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "startpj",
-    "slug": "startpj",
+    "name": "APlus Food",
+    "slug": "APlus_Food",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#333333"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,7 +25,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.lzayya.startpj"
+      "package": "com.lzayya.aplusfood"
     },
     "web": {
       "favicon": "./assets/favicon.png"

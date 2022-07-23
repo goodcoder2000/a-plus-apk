@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useEffect, useState} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -13,11 +13,14 @@ import InShop from "../components/InShop";
 import FoodDetails from "../screens/FoodDetails";
 import Login from "../screens/Login";
 import Signup from "../screens/Signup";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+
 function HomeScreen(){
+
     return(
         <Tab.Navigator
         screenOptions={{
@@ -78,7 +81,8 @@ function HomeScreen(){
 export default function StackNav(){
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login">
+            <Stack.Navigator>
+
                 <Stack.Screen name="Login" component={Login}
                 options={{
                         headerTitle: () => <HomeHeader/>
@@ -90,8 +94,8 @@ export default function StackNav(){
                         headerLeft: null,
                         headerTitle: () => <HomeHeader/> 
                     }}
-                />
-                <Stack.Screen name="HomeScreen" component={HomeScreen}
+                /> 
+                            <Stack.Screen name="HomeScreen" component={HomeScreen}
                 options={{
                     headerLeft: null,
                     headerTitle: () => <HomeHeader/> ,
@@ -112,7 +116,8 @@ export default function StackNav(){
                 options={{
                     headerShown: false
                 }}
-                />
+                />               
+                
             </Stack.Navigator>
         </NavigationContainer>
     )

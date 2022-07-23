@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {View, Text, TextInput, Alert} from 'react-native'
+import {View, Text, TextInput, Alert, ImageBackground} from 'react-native'
 import CustomButton from '../components/CustomButton'
 import Usefetch from '../components/Usefetch'
 import { Gstyles } from '../share/Gstyle'
@@ -10,12 +10,11 @@ export default function Login({navigation}) {
     const [ password, setPassword] = useState(null)
     const { data, padding} = Usefetch('https://api-aplus.onrender.com/api/users');
 
-    useEffect(() =>{
-      haveBeenLogin()
-    },[])
 
+    
+    
     //have been login check
-
+    
     const haveBeenLogin = async () =>{
       try {
         await AsyncStorage.getItem('userId')
@@ -28,7 +27,10 @@ export default function Login({navigation}) {
         console.log(error)
       }
     }
-
+    
+    useEffect(() =>{
+      haveBeenLogin()
+    },[])
     // new login
 
     const loginCheck = async () =>{
@@ -46,6 +48,11 @@ export default function Login({navigation}) {
     }
 
   return (
+    <ImageBackground
+    resizeMode='cover'
+    source={ require('../assets/images/bakey.jpg')}
+    style={{flex: 1}}
+    >
     <View
     style={Gstyles.loginCon}
     >
@@ -77,5 +84,6 @@ export default function Login({navigation}) {
         </View>
         }
     </View>
+        </ImageBackground>
   )
 }
