@@ -3,10 +3,10 @@ import { View, Text, Image, TouchableOpacity} from 'react-native'
 import { Gstyles } from '../share/Gstyle'
 import { AntDesign } from '@expo/vector-icons';
 
-export default function EachMenu({fName, img, note, price, navigation}) {
+export default function EachMenu({fName, img, note, price, navigation, shopData}) {
   return (
     <TouchableOpacity 
-     onPress={ () => navigation.navigate('FoodDetails',{fName: fName, img: img, note: note, price: price})}
+     onPress={ () => navigation.navigate('FoodDetails',{fName: fName, img: img, note: note, price: price, shopData: shopData})}
     >
         <View style={[Gstyles.EachMenu, Gstyles.box]}>
             <View>

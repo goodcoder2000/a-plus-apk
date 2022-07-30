@@ -1,4 +1,4 @@
-import React,{ useEffect, useState} from "react";
+import React,{ useEffect, useState, useContext} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -13,10 +13,12 @@ import InShop from "../components/InShop";
 import FoodDetails from "../screens/FoodDetails";
 import Login from "../screens/Login";
 import Signup from "../screens/Signup";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "../contexts/AuthContext";
+import Usefetch from "../components/Usefetch";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
 
 
 function HomeScreen(){
@@ -34,7 +36,8 @@ function HomeScreen(){
             },
         }}
         >
-            <Tab.Screen name="Home" component={Home}
+        
+        <Tab.Screen name="Home" component={Home}
             options={{
                 tabBarLabel: () =>false,
                 tabBarLabelStyle: {
@@ -47,9 +50,9 @@ function HomeScreen(){
                 }
             }}
             /> 
-            <Tab.Screen name="Cart" component={Cart}
+        
+        <Tab.Screen name="Cart" component={Cart}
             options={{
-                tabBarBadge: 3,
                 tabBarLabel: () =>false,
                 tabBarLabelStyle: {
                     color: "#102A68"
@@ -78,29 +81,27 @@ function HomeScreen(){
     )
 }
 
+
+
 export default function StackNav(){
+    
+    const { logined, userProfileData } = useContext(AuthContext);
+    
+    
     return(
         <NavigationContainer>
             <Stack.Navigator>
-
-                <Stack.Screen name="Login" component={Login}
-                options={{
-                        headerTitle: () => <HomeHeader/>
-                    }}
-                />
-
-                <Stack.Screen name="Signup" component={Signup}
-                options={{
-                        headerLeft: null,
-                        headerTitle: () => <HomeHeader/> 
-                    }}
-                /> 
+                {
+                    logined?
+                     (
+                        <>
                             <Stack.Screen name="HomeScreen" component={HomeScreen}
                 options={{
                     headerLeft: null,
                     headerTitle: () => <HomeHeader/> ,
                 }}
                 />
+
                 <Stack.Screen name="ShopList" component={ShopList}
                 options={{
                     headerTitle: () => <HomeHeader/> ,
@@ -116,9 +117,31 @@ export default function StackNav(){
                 options={{
                     headerShown: false
                 }}
-                />               
+                />  
+                        </>
+                    )
+                    :
+                    (
+                        <>
+
+
+                <Stack.Screen name="Login" component={Login}
+                options={{
+                    headerLeft: null,
+                    headerTitle: () => <HomeHeader/> ,
+                }}/>              
+
+                <Stack.Screen name="Signup" component={Signup}
+                options={{
+                    headerLeft: null,
+                    headerTitle: () => <HomeHeader/> ,
+                }}/>  
+            </>
+
                 
-            </Stack.Navigator>
+)
+}      
+                </Stack.Navigator>
         </NavigationContainer>
     )
 }

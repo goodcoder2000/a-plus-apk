@@ -21,7 +21,7 @@ export default function ImageSlider() {
   return (
     <View style={Gstyles.ImageSliderCon}>
         
-        {data && console.log(data)}
+        {/* {data && console.log(data)} */}
     </View>
   )
 }

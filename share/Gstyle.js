@@ -27,8 +27,8 @@ export const Gstyles = StyleSheet.create({
         paddingHorizontal: 10
     },
     ImageIcon: {
-        width: 100,
-        height: 130,
+        width: 110,
+        height: 155,
     },
     IconImageContainer: {
         width: '100%',
@@ -43,18 +43,19 @@ export const Gstyles = StyleSheet.create({
         alignItems: 'center'
     },
     IconTitle: {
-        textAlign: "center"
+        textAlign: "center",
+        fontWeight: 'bold'
     },
     categoryBody: {
         flexDirection: 'row',
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     Image: {
         width: "100%",
         height: "100%"
     },
     ProfileContainer: {
-        width: "85%",
+        width: "97%",
         padding: 10,
         marginTop: 10,
         marginLeft: "auto",
@@ -262,7 +263,7 @@ export const Gstyles = StyleSheet.create({
         marginBottom: 10
     },
     CartItemLeft: {
-        width: 150,
+        width: 170,
         padding: 20
     },
     CartItemRight: {
@@ -270,14 +271,17 @@ export const Gstyles = StyleSheet.create({
         height: 140,
     },
     CartContainer: {
-        paddingHorizontal: 30,
+        paddingHorizontal: 10,
     },
     CartItemText: {
         fontFamily: 'poppins-b',
         fontSize: 16,
     },
     checkboxCon: {
-        padding: 20
+        paddingHorizontal: 20,
+        backgroundColor: 'lightgray',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     marginFor: {
         marginTop: 10
@@ -296,7 +300,6 @@ export const Gstyles = StyleSheet.create({
     phoneNo: {
         borderWidth: 1,
         padding: 10,
-        // height: 40,
         fontFamily: 'poppins-r',
         fontSize: 15,
         marginBottom: 20,

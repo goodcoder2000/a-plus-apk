@@ -17,7 +17,7 @@ export default function InShop({route, navigation}) {
             showsVerticalScrollIndicator={false}
             style={Gstyles.Menucontainer}>
             <Text style={Gstyles.menuheader}>Menu</Text>
-              {shopData.menu.map((item, index) =><EachMenu key={index} fName={item.fName} img={item.img} note={item.note} price={item.price} navigation={navigation}/>)}
+              {shopData.menu.map((item, index) =><EachMenu key={index} fName={item.fName} img={item.img} note={item.note} price={item.price} navigation={navigation} shopData={shopData}/>)}
             </ScrollView>            
             
             

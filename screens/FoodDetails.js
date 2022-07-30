@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
-import { View, Text, Image, TouchableOpacity, ScrollView} from 'react-native'
+import React, { useState, useContext } from 'react'
+import { View, Text, Image, TouchableOpacity, } from 'react-native'
 import { Gstyles } from '../share/Gstyle'
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import CustomButton from '../components/CustomButton';
 import { FontAwesome } from '@expo/vector-icons';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function FoodDetails({route, navigation}) {
-    const { fName, img, note, price} = route.params;
+    const { fName, img, note, price, shopData} = route.params;
     const [ count, setCount] = useState(1);
+    const { userProfileData, AddtoCart } = useContext(AuthContext)
+
+    
 
     const addCount = () =>{
         setCount(count+1)
@@ -72,7 +76,9 @@ export default function FoodDetails({route, navigation}) {
                     <Text style={Gstyles.detailPrice}>{price*count} ကျပ်</Text>
                 </View>
 
-                <CustomButton title="ခြင်းထဲထည့်ရန်" color="#FE9D34" icon={<FontAwesome name="cart-plus" size={24} color="black" />}/>
+                <CustomButton title="ခြင်းထဲထည့်ရန်" color="#FE9D34" icon={<FontAwesome name="cart-plus" size={24} color="black"/>}
+                press={() => AddtoCart({shopName: shopData.SName, _id: shopData._id, location: shopData.location, count: count, fName: fName, price: price, img: img})}
+                />
             </View>
         </View>
     </View>

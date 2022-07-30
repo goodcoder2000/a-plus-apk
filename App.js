@@ -2,6 +2,7 @@ import React from "react";
 import TabNav from "./routes/TabNav";
 import { useFonts } from 'expo-font';
 import StackNav from "./routes/StackNav";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export default function App(){
   let [fontsLoaded] = useFonts({
@@ -13,6 +14,8 @@ export default function App(){
     return null;
   }
   return(
-    <StackNav/>
+    <AuthProvider>
+        <StackNav/>
+    </AuthProvider>
   )
 }
