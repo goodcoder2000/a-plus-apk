@@ -13,7 +13,7 @@ export default function CartItem({item}) {
     const [ cannotTouch, setCannotTouch] = useState(false)
 
     
-    let data = {_id: item._id,fName: item.fName, price: item.price, count: count, img: item.img, delivered: false, day: moment().format("MMM Do YY"), time: moment().format('hmm')}    
+    let data = {_id: item._id,fName: item.fName, price: item.price, count: count, img: item.img, delivered: false, day: moment().format("MMM Do YY"), time: moment().format('Hmm')}    
 
     const handleChange = () =>{
         if(!isChecked){

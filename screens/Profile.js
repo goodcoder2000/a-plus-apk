@@ -1,4 +1,4 @@
-import React,{ useContext, useEffect} from "react";
+import React,{ useContext, useEffect, useState} from "react";
 import { View, Text, ActivityIndicator } from "react-native";
 import CustomButton from "../components/CustomButton";
 import { Gstyles } from "../share/Gstyle";
@@ -9,9 +9,101 @@ import Usefetch from "../components/Usefetch";
 
 export default function Profile({navigation}){
 
-    const { Logout, userProfileData } = useContext(AuthContext)
+    const { Logout, userProfileData } = useContext(AuthContext);
+    const { data, padding } = Usefetch("https://api-aplus.onrender.com/api/users/"+userProfileData);
 
-    const { data, padding } = Usefetch("https://api-aplus.onrender.com/api/users/"+userProfileData)
+    let QetoM;
+    const quarterdataCheck = () =>{
+        switch(data.quarterForServer){
+            case "kachinsu":
+                QetoM="ကချင်စု"
+            break;
+
+            case "ktp":
+                QetoM="ကျွန်းပင်သာ"
+            break;
+
+            case "ayesaythi":
+                QetoM="အေးစေတီ"
+            break;
+
+            case "shwenyoungpin":
+                QetoM="ရွှေညောင်ပင်"
+            break;
+
+            case "ranpu":
+                QetoM="ရမ်ပူ"
+            break;
+
+            case "shansutaung":
+                QetoM="ရှမ်းစုတောင်"
+            break;
+
+            case "shansunorth":
+                QetoM="ရှမ်းစုမြောက်"
+            break;
+
+            case "yangyiaung":
+                QetoM="ရန်ကြီးအောင်"
+            break;
+
+            case "linyaungchi":
+                QetoM="လင်းရောင်ခြည်"
+            break;
+
+            case "dugahtaung":
+                QetoM="ဒူကထောင်"
+            break;
+
+            case "ayeyar":
+                QetoM="ဧရာ"
+            break;
+
+            case "thithar":
+                QetoM="သီတာ"
+            break;
+
+            case "sitharpu":
+                QetoM="စီသာပူ"
+            break;
+
+            case "thatkone":
+                QetoM="တပ်ကုန်း"
+            break;
+
+            case "myemyit":
+                QetoM="မြေမြင့်"
+            break;
+
+            case "yuzana":
+                QetoM="ယုဇန"
+            break;
+
+            case "khymarthiri":
+                QetoM="ခေမာသီရိ"
+            break;
+
+            case "aungnan":
+                QetoM="အောင်နန်း"
+            break;
+
+            case "myothit":
+                QetoM="မြို့သစ်"
+            break;
+
+            case "myothitgyi":
+                QetoM="မြို့သစ်ကြီး"
+            break;
+
+            case "minyat":
+                QetoM="မင်းရပ်"
+            break;
+
+            default:
+                console.log("No Quarter")
+        }
+    }
+    { data && quarterdataCheck()}
 
     return(
         <View style={Gstyles.HomeContainer}>
@@ -39,7 +131,7 @@ export default function Profile({navigation}){
                 </Text>
 
                 <Text style={Gstyles.profileText}>
-                    Address: <Text style={Gstyles.userData}>{data.address}</Text>
+                    Address: <Text style={Gstyles.userData}>{QetoM}</Text>
                 </Text>
 
                 <Text style={Gstyles.profileText}>

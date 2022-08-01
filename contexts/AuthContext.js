@@ -29,6 +29,7 @@ const AuthProvider = ({children}) => {
     // RegisterConform
 
     const RegisterConform = (data) =>{
+      console.log(data)
       fetch("https://api-aplus.onrender.com/api/users/register",{
       method: "POST",
       headers: {'Content-type': 'application/json'},
@@ -97,9 +98,9 @@ const AuthProvider = ({children}) => {
         }
     }
 
-    // useEffect(() =>{
-    //   Autologin()
-    // }, [])
+    useEffect(() =>{
+      Autologin()
+    }, [])
 
 
     // LOGOUT
@@ -173,6 +174,7 @@ const AuthProvider = ({children}) => {
         logined,
         setLogined,
         Register,
+        RegisterConform,
         Login,
         Logout,
         userProfileData,

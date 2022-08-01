@@ -339,5 +339,28 @@ export const Gstyles = StyleSheet.create({
     },
     checkbox: {
         padding: 10
+    },
+    quarterModal: {
+        flex: 1,
+        backgroundColor: 'lightgray'
+    },
+    EachQuarter: {
+        backgroundColor: '#fff',
+        borderRadius: 8,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 10,
+        marginHorizontal: 10
+    },
+    EachQuarterText: {
+        padding: 10,
+        fontSize: 18,
+    },
+    modelTitle: {
+        padding: 10,
+        fontSize: 20,
+        fontWeight: 'bold'
     }
 })
