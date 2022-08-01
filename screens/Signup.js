@@ -1,8 +1,9 @@
 import React, {useContext, useState} from 'react'
-import {View, Text, TextInput, ScrollView, ImageBackground} from 'react-native'
+import {View, Text, TextInput, ScrollView, ImageBackground, TouchableOpacity} from 'react-native'
 import CustomButton from '../components/CustomButton'
 import { Gstyles } from '../share/Gstyle'
 import { AuthContext } from '../contexts/AuthContext'
+import { AntDesign } from '@expo/vector-icons';
 
 export default function Signup({navigation}) {
 
@@ -56,14 +57,17 @@ export default function Signup({navigation}) {
         onChangeText = {(value) => setPassword(value)}
         />
 
-        <TextInput
-        style={Gstyles.phoneNo}
-        placeholder="Enter Address..."
-        placeholderTextColor="#fff"
-        autoComplete="password"
-        value={address}
-        onChangeText = {(value) => setAddress(value)}
-        />
+        {/* Quarter Select */}
+        <TouchableOpacity>
+          <View
+          style={Gstyles.selectQuarter}
+          >
+            <AntDesign name="caretright" size={24} color="#fff" />
+            <Text
+            style={Gstyles.selectQuarterText}>
+              Select Quarter</Text>
+          </View>
+        </TouchableOpacity>
 
         <TextInput
         style={Gstyles.phoneNo}

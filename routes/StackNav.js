@@ -85,7 +85,7 @@ function HomeScreen(){
 
 export default function StackNav(){
     
-    const { logined, userProfileData } = useContext(AuthContext);
+    const { logined } = useContext(AuthContext);
     
     
     return(

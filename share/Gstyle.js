@@ -228,7 +228,6 @@ export const Gstyles = StyleSheet.create({
     },
     CustomButton: {
         padding: 10,
-        marginBottom: 10,
         borderRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
@@ -287,9 +286,15 @@ export const Gstyles = StyleSheet.create({
         marginTop: 10
     },
     OrderContainer: {
-        height: 150,
-        backgroundColor: '#333',
-    },
+        width: '100%',
+        height: 100,
+        backgroundColor: 'lightgray',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 70
+       },
     ImageSliderCon: {
         width: '100%',
         height: 170,
@@ -307,10 +312,32 @@ export const Gstyles = StyleSheet.create({
         color: "#fff",
         backgroundColor: 'rgba(51,51,51,0.6)'
     },
+    selectQuarter: {
+        backgroundColor: 'rgba(51,51,51,0.6)',
+        borderRadius: 8,
+        padding: 10,
+        marginBottom: 20,
+        borderWidth: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+    selectQuarterText: {
+        fontFamily: 'poppins-r',
+        fontSize: 15,
+        color: "#fff",
+    },
     loginCon: {
         paddingHorizontal: 10,
         flex: 1,
-        marginTop: 30,
-        
+        marginTop: 30        
+    },
+    totalText: {
+        color: "#FE9D34",
+        fontSize: 15,
+        fontFamily: "poppins-b"
+    },
+    checkbox: {
+        padding: 10
     }
 })

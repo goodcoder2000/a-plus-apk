@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, ActivityIndicator } from 'react-native'
 import EachShop from '../components/EachShop';
 import { Gstyles } from '../share/Gstyle';
 
@@ -8,6 +8,7 @@ export default function ShopList({route, navigation}) {
   const {category} = route.params;
 
   const [data, setData] = useState(null);
+  const [ padding, setPadding] = useState(true)
 
   const ShopListApiCall = (category) =>{
     useEffect(() =>{
@@ -21,7 +22,10 @@ export default function ShopList({route, navigation}) {
       return res.json()
     })
 
-    .then(data => setData(data))
+    .then(data => {
+      setData(data)
+      setPadding(false)
+    })
     .catch(err => console.log(err))
 
     return () => controller.abort();
@@ -40,9 +44,14 @@ export default function ShopList({route, navigation}) {
             style={Gstyles.shoplistScrollCon}
             showsVerticalScrollIndicator={false}
             >
+
                 { data?.map((item, index) =>{  
                   return <EachShop key={index} SName={item.SName} category={item.category} SImg={item.SImg} deliPrice="800" navigation={navigation} item={item}/>
                 })}
+
+                {/* loading */}
+                { padding && <ActivityIndicator size="large" color="#FE9D34"/> }
+
             </ScrollView>
     </View>
   )

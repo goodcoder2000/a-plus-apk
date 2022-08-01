@@ -1,5 +1,5 @@
 import React,{ useContext, useEffect} from "react";
-import { View, Text } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 import CustomButton from "../components/CustomButton";
 import { Gstyles } from "../share/Gstyle";
 import { AntDesign } from '@expo/vector-icons';
@@ -11,14 +11,13 @@ export default function Profile({navigation}){
 
     const { Logout, userProfileData } = useContext(AuthContext)
 
-    const { data } = Usefetch("https://api-aplus.onrender.com/api/users/"+userProfileData)
+    const { data, padding } = Usefetch("https://api-aplus.onrender.com/api/users/"+userProfileData)
 
     return(
         <View style={Gstyles.HomeContainer}>
             {
                 data && 
                 <View style={Gstyles.ProfileContainer}>
-                { console.log(data)}
                 <Text style={Gstyles.profiletitle}>
                     Profile
                 </Text>
@@ -57,6 +56,7 @@ export default function Profile({navigation}){
                 />
             </View>
             }
+            { padding && <ActivityIndicator size="large" color="#FE9D34"/> }
         </View>
     )
 }

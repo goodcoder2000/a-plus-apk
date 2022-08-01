@@ -15,7 +15,7 @@ const AuthProvider = ({children}) => {
     // REGISTER
     const Register = (data) =>{
       if(data.name.length < 3 || data.phoneno.length < 9 || data.password.length === 0 || data.homeno.length === 0 || data.street.length === 0){
-        Alert.alert("Warining!", "Please Correct Answer",[
+        Alert.alert("APlUS FOOD Say!!!", "Please Correct Answer",[
           {text: "Know", onPress: () =>null}
         ])
       } else {
@@ -39,7 +39,7 @@ const AuthProvider = ({children}) => {
     })
     .then(data =>{
       if(data.message === "This Phone has already Exits"){
-        Alert.alert("Warning!!", "ဒီဖုန်းနံပါတ်သည်အကောင့်ဖွင့်ပြီးသားဖြစ်သည်။")
+        Alert.alert("APlUS FOOD Say!!!", "ဒီဖုန်းနံပါတ်သည်အကောင့်ဖွင့်ပြီးသားဖြစ်သည်။")
       } else if(data.message === "register success"){
         Alert.alert("အကောင့်ဖွင့်အောင်မြင်သည်")
       }
@@ -49,25 +49,34 @@ const AuthProvider = ({children}) => {
     // LOGIN
 
     const Login = (data) =>{
-      try {
-        fetch("https://api-aplus.onrender.com/api/users/login",{
-        method: 'POST',
-        headers: {"Content-type": "application/json"},
-        body: JSON.stringify(data)
-      })
-      .then(res =>{
-        return res.json()
-      })
-      .then(data => {
-        if(data.error !== "user not found"){
-          setUserData(data)
-          setLogined(true)
-          AsyncStorage.setItem("userData", JSON.stringify(data.user))
+      if(data.phoneno.length === 0){
+        Alert.alert("APlUS FOOD Say!!!", "Enter Your Phone number!!")
+      } else if(data.password.length === 0) {
+        Alert.alert("APlUS FOOD Say!!!", "Enter Your Password!!")        
+      } else {
+
+        // do here
+        try {
+          fetch("https://api-aplus.onrender.com/api/users/login",{
+          method: 'POST',
+          headers: {"Content-type": "application/json"},
+          body: JSON.stringify(data)
+        })
+        .then(res =>{
+          return res.json()
+        })
+        .then(data => {
+          if(data.error !== "user not found"){
+            setUserData(data)
+            setLogined(true)
+            AsyncStorage.setItem("userData", JSON.stringify(data.user))
+          }
+        })
+        } catch (error) {
+          console.log(error)
         }
-      })
-      } catch (error) {
-        console.log(error)
       }
+      
     }
 
     // AUTO LOGIN
@@ -77,9 +86,10 @@ const AuthProvider = ({children}) => {
         await AsyncStorage.getItem("userData")
         .then(value =>{
           if(value !== null){
-            const toOriginal = JSON.parse(value);
-            const data = {phoneno: toOriginal.phoneno, password: toOriginal.password}
-            Login(data)
+            setLogined(true)
+            // const toOriginal = JSON.parse(value);
+            // const data = {phoneno: toOriginal.phoneno, password: toOriginal.password}
+            // Login(data)
           }
         })
       } catch (error) {
@@ -87,9 +97,9 @@ const AuthProvider = ({children}) => {
         }
     }
 
-    useEffect(() =>{
-      Autologin()
-    }, [])
+    // useEffect(() =>{
+    //   Autologin()
+    // }, [])
 
 
     // LOGOUT
@@ -134,22 +144,28 @@ const AuthProvider = ({children}) => {
     // SuccessMessage() 
   }
 
-  // Cart item Remove
-
-  const CartItemRemove = (_id, fName) =>{
-    setCartData(cartData.filter((item) => item._id !== _id && item.fName !== fName))
-  }
-
   // add order data
-
   const add = (data) =>{
     setOrderData([...orderData,data])
-}
+  }
 
 // remove order data
-const remove = (_id, fName) =>{
-    setOrderData(orderData.filter((item) => item._id !== _id && item.fName !== fName ))
-}
+  const remove = (_id, fName) =>{
+      setOrderData(orderData.filter((item) => item._id !== _id && item.fName !== fName ))
+  }
+
+  // ORDER NOW 
+  const OrderClick = () =>{
+    if(orderData.length === 0){
+      Alert.alert("APlUS FOOD Say!!!", "ပစ္စည်းရွှေးချယ်ထားတာ မရှိပါ!!", [{text: "ရွှေးမယ်", onPress: () => null}])
+    } else {
+      Alert.alert("APlUS FOOD Say!!!", "အော်ဒါတင်မည်သေချာပြီလား?",[
+        {text: "ပယ်ဖျတ်မည်", onPress: () => null},
+        {text: "အော်ဒါတင်မည်", onPress: () => console.log('order success', orderData)}
+      ])
+      
+    }
+  }
 
   return (
     <AuthContext.Provider
@@ -163,9 +179,10 @@ const remove = (_id, fName) =>{
         gettingUserData,
         AddtoCart,
         cartData,
-        CartItemRemove,
         add,
-        remove
+        remove,
+        orderData,
+        OrderClick
     }}
     >
       {console.log(orderData)}

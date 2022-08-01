@@ -1,23 +1,26 @@
 import React, {useState, useContext} from 'react'
 import {Gstyles}  from '../share/Gstyle'
 import Checkbox from "expo-checkbox";
-import { View, Text, Image, TouchableOpacity} from "react-native";
+import { View, Text, Image} from "react-native";
 import PlusandMinus from './PlusandMinus';
-import { MaterialIcons } from '@expo/vector-icons';
 import { AuthContext } from '../contexts/AuthContext';
+import moment from 'moment';
 
 export default function CartItem({item}) {
     const [ count, setCount] = useState(item.count);
     const [isChecked, setChecked] = useState(false);
-    const {CartItemRemove, add, remove} = useContext(AuthContext);
+    const {add, remove} = useContext(AuthContext);
     const [ cannotTouch, setCannotTouch] = useState(false)
+
     
+    let data = {_id: item._id,fName: item.fName, price: item.price, count: count, img: item.img, delivered: false, day: moment().format("MMM Do YY"), time: moment().format('hmm')}    
 
     const handleChange = () =>{
         if(!isChecked){
             setChecked(true)
             setCannotTouch(true)
-            add({_id: item._id,fName: item.fName, price: item.price, count: count, img: item.img})
+            add(data)
+            
         } else {
             remove(item._id, item.fName)
             setCannotTouch(false)
@@ -31,15 +34,11 @@ export default function CartItem({item}) {
                     
                     <View style={Gstyles.checkboxCon}>
                         <Checkbox
+                        style={Gstyles.checkbox}
                         value={isChecked}
                         onValueChange={handleChange}
                         color={isChecked ? '#FE9D34' : undefined}
                         />
-                        <TouchableOpacity
-                        onPress={() =>CartItemRemove(item._id, item.fName)}
-                        >
-                            <MaterialIcons name="delete-forever" size={35} color="red" style={{marginTop: 25}} />
-                        </TouchableOpacity>
                     </View>
                     
                     <View style={Gstyles.CartItemLeft}>
