@@ -13,8 +13,10 @@ import InShop from "../components/InShop";
 import FoodDetails from "../screens/FoodDetails";
 import Login from "../screens/Login";
 import Signup from "../screens/Signup";
+import Setting from "../screens/Setting";
 import { AuthContext } from "../contexts/AuthContext";
 import Usefetch from "../components/Usefetch";
+import OrderSuccessitem from "../screens/OrderSuccessitem";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -65,7 +67,10 @@ function HomeScreen(){
             }}
             />
             <Tab.Screen name="Profile" component={Profile}
-            options={{
+            options={
+                
+                {
+                unmountOnBlur: true,
                 tabBarLabel: () =>false,
                 tabBarLabelStyle: {
                     color: "#102A68"
@@ -113,11 +118,29 @@ export default function StackNav(){
                 }}
                 />
 
+                <Stack.Screen name="Cart" component={Cart}
+                options={{
+                    headerShown: false
+                }}                
+                />
+
                 <Stack.Screen name="FoodDetails" component={FoodDetails}
                 options={{
                     headerShown: false
                 }}
                 />  
+
+                <Stack.Screen name="OrderSuccessitem" component={OrderSuccessitem}
+                options={{
+                    headerTitle: () => <HomeHeader/> ,
+                }}
+                />
+
+                <Stack.Screen name="Setting" component={Setting}
+                options={{
+                    headerTitle: () => <HomeHeader/>
+                }}
+                />
                         </>
                     )
                     :

@@ -13,8 +13,7 @@ export default function Signup({navigation}) {
   const [name, setName] = useState('')
   const [ phoneno, setPhoneno] = useState('')
   const [ password, setPassword] = useState('')
-  const [ quarterForClient, setQuarterForClient] = useState('Select Quarter') // for clinet interface
-  const [ quarterForServer, setQuarterForServer] = useState(''); // for server data
+  const [ quarter, setQuarter] = useState('Select Quarter')
   const [ homeno, setHomeno] = useState('')
   const [street, setStreet] = useState('')
 
@@ -22,30 +21,30 @@ export default function Signup({navigation}) {
 
 
   const quarterData = [
-    {name: "ကချင်စု", value: "kachinsu"},
-    {name: "ကျွန်းပင်သာ", value: "ktp"},
-    {name: "အေးစေတီ", value: "ayesaythi"},
-    {name: "ရွှေညောင်ပင်", value: "shwenyoungpin"},
-    {name: "ရမ်ပူ", value: "ranpu"},
-    {name: "ရှမ်းစုတောင်", value: "shansutaung"},
-    {name: "ရှမ်းစုမြောက်", value: "shansunorth"},
-    {name: "ရန်ကြီးအောင်", value: "yangyiaung"},
-    {name: "လင်းရောင်ခြည်", value: "linyaungchi"},
-    {name: "ဒူကထောင်", value: "dugahtaung"},
-    {name: "ဧရာ", value: "ayeyar"},
-    {name: "သီတာ", value: "thithar"},
-    {name: "စီသာပူ", value: "sitharpu"},
-    {name: "တပ်ကုန်း", value: "thatkone"},
-    {name: "မြေမြင့်", value: "myemyit"},
-    {name: "ယုဇန", value: "yuzana"},
-    {name: "ခေမာသီရိ", value: "khymarthiri"},
-    {name: "အောင်နန်း", value: "aungnan"},
-    {name: "မြို့သစ်", value: "myothit"},
-    {name: "မြို့သစ်ကြီး", value: "myothitgyi"},
-    {name: "မင်းရပ်", value: "minyat"}
+    {name: "ကချင်စု"},
+    {name: "ကျွန်းပင်သာ"},
+    {name: "အေးစေတီ"},
+    {name: "ရွှေညောင်ပင်"},
+    {name: "ရမ်ပူ"},
+    {name: "ရှမ်းစုတောင်"},
+    {name: "ရှမ်းစုမြောက်"},
+    {name: "ရန်ကြီးအောင်"},
+    {name: "လင်းရောင်ခြည်"},
+    {name: "ဒူကထောင်"},
+    {name: "ဧရာ"},
+    {name: "သီတာ"},
+    {name: "စီသာပူ"},
+    {name: "တပ်ကုန်း"},
+    {name: "မြေမြင့်"},
+    {name: "ယုဇန"},
+    {name: "ခေမာသီရိ"},
+    {name: "အောင်နန်း"},
+    {name: "မြို့သစ်"},
+    {name: "မြို့သစ်ကြီး"},
+    {name: "မင်းရပ်"}
   ];
 
-  const data = {name: name, phoneno: phoneno, password: password, quarterForServer: quarterForServer, orderConformed: [], homeno: homeno, street: street};
+  const data = {name: name, phoneno: phoneno, password: password, quarter: quarter, orderConformed: [], homeno: homeno, street: street};
 
   return (
     <ImageBackground
@@ -96,7 +95,7 @@ export default function Signup({navigation}) {
             <AntDesign name="caretright" size={24} color="#fff" />
             <Text
             style={Gstyles.selectQuarterText}>
-            {quarterForClient}
+            {quarter}
             </Text>
           </View>
         </TouchableOpacity>
@@ -114,7 +113,7 @@ export default function Signup({navigation}) {
             <ScrollView
             showsVerticalScrollIndicator={false}
             >
-              { quarterData.map((item, index) => <QuarterModal key={index} item={item} setQuarterForClient={setQuarterForClient} setQuarterModelShow={setQuarterModelShow} setQuarterForServer={setQuarterForServer}/>)}
+              { quarterData.map((item, index) => <QuarterModal key={index} item={item} setQuarterModelShow={setQuarterModelShow} setQuarter={setQuarter} />)}
             </ScrollView>
           </View>
 
@@ -142,6 +141,7 @@ export default function Signup({navigation}) {
 
         <CustomButton title="Have already account?" color="#FF5621" navigation={navigation}
         press = {() => navigation.navigate('Login')}
+        marginTop={10}
         />
     </View>
     </ScrollView>

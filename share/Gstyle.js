@@ -18,7 +18,8 @@ export const Gstyles = StyleSheet.create({
     },
     foodtext: {
         fontSize: 18,
-        marginBottom: 10
+        marginBottom: 10,
+        fontWeight: "bold"
     },
     FoodCategoryContainer: {
         backgroundColor: '#fff',
@@ -44,7 +45,8 @@ export const Gstyles = StyleSheet.create({
     },
     IconTitle: {
         textAlign: "center",
-        fontWeight: 'bold'
+        fontSize: 15
+        // fontWeight: 'bold'
     },
     categoryBody: {
         flexDirection: 'row',
@@ -86,23 +88,21 @@ export const Gstyles = StyleSheet.create({
         marginRight: "auto"
     },
     shopHeader: {
-        fontSize: 18,
-        fontWeight: "bold"
+        fontSize: 20,
+        padding: 10
     },
     shopListContainer: {
         flex: 1,
         marginTop: 10,
-        paddingBottom: 10,
-        paddingHorizontal: 5
     },
     EachShopContainer: {
-        width: "100%",
         height: 120,
         backgroundColor: "#fff",
         borderRadius: 10,
         padding: 10,
-        marginTop: 13,
-        marginHorizontal: 'auto',
+        marginTop: 6,
+        marginBottom: 6,
+        marginHorizontal: 8,
         flexDirection: 'row',
         
     },
@@ -137,15 +137,15 @@ export const Gstyles = StyleSheet.create({
         fontFamily: 'poppins-r'
     },
     Menucontainer: {
-        paddingHorizontal: 10,
+
     },
     EachMenu: {
-        width: "100%",
         backgroundColor: "#fff",
         marginBottom: 7,
         borderRadius: 8,
         flexDirection: 'row',
-        padding: 10
+        padding: 10,
+        marginHorizontal: 8
     },
     MenuDetails: {
         paddingTop: 10,
@@ -234,7 +234,7 @@ export const Gstyles = StyleSheet.create({
         flexDirection: 'row'
     },
     CustomButtonTitle:{
-        fontSize: 18,
+        // fontSize: 18,
         color: '#fff',
         textAlign: 'center',
         fontFamily: 'poppins-b',
@@ -362,5 +362,34 @@ export const Gstyles = StyleSheet.create({
         padding: 10,
         fontSize: 20,
         fontWeight: 'bold'
+    },
+    orderSuccessMessageContainer: {
+        position: "absolute",
+        left: 0,
+        right: 0
+    },
+    OrderSuccessitem: {
+        flex: 1
+    },
+    EachOrdered: {
+        marginTop: 5,
+        marginBottom: 5,
+        marginHorizontal: 10,
+        padding: 10,
+        backgroundColor: "#fff",
+        borderRadius: 5,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
+    EachOrderedImage: {
+        width: 60,
+        height: 60
+    },
+    textStyle: {
+        fontStyle: "italic"
+    },
+    settingCon: {
+        padding: 10
     }
 })

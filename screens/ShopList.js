@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { View, Text, ScrollView, ActivityIndicator } from 'react-native'
 import EachShop from '../components/EachShop';
 import { Gstyles } from '../share/Gstyle';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function ShopList({route, navigation}) {
+  const {userProfileData, userQuarter} = useContext(AuthContext);
 
   const {category} = route.params;
 
@@ -25,6 +27,7 @@ export default function ShopList({route, navigation}) {
     .then(data => {
       setData(data)
       setPadding(false)
+      console.log(userProfileData)
     })
     .catch(err => console.log(err))
 
@@ -36,9 +39,12 @@ export default function ShopList({route, navigation}) {
   return (
     <View style={Gstyles.shopListContainer}>
         <Text style={Gstyles.shopHeader}>
-            {category} ရရှိနိုင်သော ဆိုင်များ
+            <Text style={{fontFamily: "poppins-b"}}>{category}</Text> ရရှိနိုင်သော ဆိုင်များ
+            {data && <Text style={{fontFamily: "poppins-b"}}>{data.length}ဆိုင်</Text>}
         </Text>
-            {data && <Text>{data.length}ဆိုင်</Text>}
+        <View>
+          <Text>{userQuarter}</Text>
+        </View>
 
             <ScrollView
             style={Gstyles.shoplistScrollCon}

@@ -51,6 +51,7 @@ export default function Login({navigation}) {
 
         <CustomButton title="Create account?" color="#FF5621" navigation={navigation}
         press = {() => navigation.navigate('Signup')}
+        marginTop={10}
         />
         </View>
     </View>

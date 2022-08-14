@@ -1,12 +1,24 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity} from 'react-native'
+import { View, Text, Image, TouchableOpacity, Alert} from 'react-native'
 import { Gstyles } from '../share/Gstyle'
 import { AntDesign } from '@expo/vector-icons';
+import moment from 'moment';
 
 export default function EachMenu({fName, img, note, price, navigation, shopData}) {
   return (
     <TouchableOpacity 
-     onPress={ () => navigation.navigate('FoodDetails',{fName: fName, img: img, note: note, price: price, shopData: shopData})}
+     onPress={ () => {
+      let timeChecking = moment().format('Hmm')
+
+      console.log(timeChecking)
+      if(!timeChecking >= 1715){
+        Alert.alert("APlUS FOOD Say!!!","၅နာရီ ၁၅မိနစ်ထိသာဆိုင်ဖွင့်သည်။ နောက်နေ့မှမှာပါ။",[
+          {text: "သိပြီ", onPress: () => null}
+        ])
+      } else {
+        navigation.navigate('FoodDetails',{fName: fName, img: img, note: note, price: price, shopData: shopData})
+      }
+     }}
     >
         <View style={[Gstyles.EachMenu, Gstyles.box]}>
             <View>

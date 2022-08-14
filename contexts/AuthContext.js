@@ -1,16 +1,18 @@
 import React,{ createContext, useState, useEffect} from 'react'
 import { Alert,ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Usefetch from '../components/Usefetch';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
-    const [ logined, setLogined] = useState(false);
-    const [ userData, setUserData] = useState(null);
-    const [ userProfileData, setUserProfiledata] = useState(null)
-    const [ cartData, setCartData] = useState([]);
+    const [ logined, setLogined] = useState(false)
+    const [ userData, setUserData] = useState(null)
+    const [ UserId, setUserId] = useState(null)
+    const [ cartData, setCartData] = useState([])
     const [ orderData, setOrderData ] = useState([])
-    
+    const [ userQuarter, setUserQuarter] = useState(null)
+
 
     // REGISTER
     const Register = (data) =>{
@@ -23,8 +25,7 @@ const AuthProvider = ({children}) => {
           {text: "ပြန်စစ်မယ်", onPress: () => null},
           {text: "သေချာပြီ", onPress: () => RegisterConform(data)}
         ])
-      }
-      
+      }      
     }
     // RegisterConform
 
@@ -122,7 +123,10 @@ const AuthProvider = ({children}) => {
       .then(value =>{
         if(value !== null){
           let userId = JSON.parse(value)._id;
-          setUserProfiledata(userId)
+          setUserId(userId)
+          let userQuarter = JSON.parse(value).quarter;
+          console.log("user quarter is", userQuarter)
+          setUserQuarter(userQuarter)
         }
       })
   }
@@ -141,8 +145,16 @@ const AuthProvider = ({children}) => {
   // Add to Cart
 
   const AddtoCart = (data) =>{
-    setCartData([...cartData,data])
-    // SuccessMessage() 
+    if(cartData.find((item) => item.fName === data.fName && item._id === data._id)){
+      Alert.alert("APlUS FOOD Say!!!", "ခြင်းထဲတွင်ရှိပြီးသားဖြစ်သည်",[
+        {text: "သိပြီ", onPress: () => null}
+      ])
+    } else {
+      setCartData([...cartData,data])
+      // SuccessMessage()
+    }
+    // console.log(data)
+    
   }
 
   // add order data
@@ -156,16 +168,64 @@ const AuthProvider = ({children}) => {
   }
 
   // ORDER NOW 
-  const OrderClick = () =>{
+  const OrderClick = (data) =>{
     if(orderData.length === 0){
       Alert.alert("APlUS FOOD Say!!!", "ပစ္စည်းရွှေးချယ်ထားတာ မရှိပါ!!", [{text: "ရွှေးမယ်", onPress: () => null}])
     } else {
       Alert.alert("APlUS FOOD Say!!!", "အော်ဒါတင်မည်သေချာပြီလား?",[
         {text: "ပယ်ဖျတ်မည်", onPress: () => null},
-        {text: "အော်ဒါတင်မည်", onPress: () => console.log('order success', orderData)}
-      ])
-      
+        {text: "အော်ဒါတင်မည်", onPress: () => OrderComformed(data)}
+      ])      
     }
+  }
+
+  // ORDER COMFORMED
+
+  const OrderComformed = (data) =>{
+    try {
+      console.log("orderconformed", data)
+      for(let i =0; i<orderData.length; i++){
+        fetch("https://api-aplus.onrender.com/api/users/"+UserId+"/orderConformed",{
+        method: 'PATCH',
+        headers: {"content-type": "application/json"},
+        body: JSON.stringify(data[i])
+      })
+        .then(res => res.json())
+        .then(data =>{
+          if(data.message === "user order success" && orderData.length-1 === i){
+            console.log("order success")
+          }
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // profile update
+
+  const profileUpdate = (updateData) =>{
+    try {
+      fetch("https://api-aplus.onrender.com/api/users/"+UserId+"/profileUpdate",{
+      method: 'PATCH',
+      headers: {"content-type": "application/json"},
+      body: JSON.stringify(updateData)
+      })
+      .then(res => res.json())
+      .then(data =>{
+        if(data.message === "profile update success"){
+          // Alert.alert("APlUS FOOD Say!!!", "Profile Update Successfully!",[
+          //   {text: "သိပြီ", onPress: () => null}
+          // ])
+          // AsyncStorage.setItem("userData", JSON.stringify(updateData))
+          // console.log("hee data",updateData)
+          console.log("profile update success")
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+    console.log("data update is", updateData, "user id", UserId)
   }
 
   return (
@@ -177,14 +237,17 @@ const AuthProvider = ({children}) => {
         RegisterConform,
         Login,
         Logout,
-        userProfileData,
+        UserId,
         gettingUserData,
         AddtoCart,
         cartData,
         add,
         remove,
         orderData,
-        OrderClick
+        OrderClick,
+        OrderComformed,
+        profileUpdate,
+        userQuarter
     }}
     >
       {console.log(orderData)}

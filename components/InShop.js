@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Text, View, Image, ScrollView, FlatList } from 'react-native'
+import React from 'react'
+import { Text, View, Image, ScrollView } from 'react-native'
 import { Gstyles } from '../share/Gstyle';
 import EachMenu from './EachMenu';
 import { Ionicons } from '@expo/vector-icons';

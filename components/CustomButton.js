@@ -1,17 +1,18 @@
 import React from 'react'
-import { View, Text, TouchableOpacity} from 'react-native'
+import { View, Text, TouchableHighlight} from 'react-native'
 import { Gstyles } from '../share/Gstyle'
 
 
-export default function CustomButton({title, color, navigation, press, icon}) {
+export default function CustomButton({title, color, navigation, press, icon, marginTop}) {
   return (
-    <TouchableOpacity
+    <TouchableHighlight
+    underlayColor="#fff"
     onPress={ press }
     >
-        <View style={[Gstyles.CustomButton,Gstyles.box, {backgroundColor: color}]}>
+        <View style={[Gstyles.CustomButton,Gstyles.box, {backgroundColor: color, marginTop: marginTop?marginTop: 0}]}>
             <Text style={Gstyles.CustomButtonTitle}>{title}</Text>
             {icon}
         </View>
-    </TouchableOpacity>
+    </TouchableHighlight>
   )
 }

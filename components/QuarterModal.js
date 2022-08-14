@@ -3,13 +3,17 @@ import { View, Text, TouchableOpacity} from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { Gstyles } from '../share/Gstyle'
 
-export default function QuarterModal({item, setQuarterForClient, setQuarterModelShow, setQuarterForServer}) {
+export default function QuarterModal({item, setQuarterModelShow, setQuarter, setNewQuarter}) {
     return(
         <TouchableOpacity
         onPress={ () => {
-            setQuarterForServer(item.value) // for server data
-            setQuarterForClient(item.name) // for client interface
-            setQuarterModelShow(false)
+            if(setQuarter){
+                setQuarter(item.name)
+                setQuarterModelShow(false)
+            } else {
+                setNewQuarter(item.name)
+                setQuarterModelShow(false)
+            }
         }
         }
         >

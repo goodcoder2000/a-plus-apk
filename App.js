@@ -1,5 +1,4 @@
 import React from "react";
-import TabNav from "./routes/TabNav";
 import { useFonts } from 'expo-font';
 import StackNav from "./routes/StackNav";
 import { AuthProvider } from "./contexts/AuthContext";
