@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { Gstyles } from '../share/Gstyle'
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function EachShop({SName, category, deliPrice, SImg, navigation, item}) {
+export default function EachShop({SName, category, deliPrice, SImg, navigation, item, userQuarter}) {
   return (
     <TouchableOpacity 
     onPress={ () => navigation.navigate('InShop',{shopData: item}) }
@@ -16,11 +16,16 @@ export default function EachShop({SName, category, deliPrice, SImg, navigation, 
         <View style={Gstyles.EachShopTextCon}>
             <Text style={Gstyles.ESSName}>{SName}</Text>
             <Text>{category}</Text>
-            
+
             <Text style={Gstyles.deliPrice}>
                 <MaterialIcons name="delivery-dining" size={25} color="black" />
                 {deliPrice}-MMK
             </Text>
+            
+            <Text style={Gstyles.deliPrice}>
+                {item.location} - {userQuarter}
+            </Text>
+            {console.log("item data here", item.location)}
         </View>
     </View>
     </TouchableOpacity>

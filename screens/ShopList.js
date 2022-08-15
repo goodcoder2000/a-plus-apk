@@ -27,7 +27,6 @@ export default function ShopList({route, navigation}) {
     .then(data => {
       setData(data)
       setPadding(false)
-      console.log(userProfileData)
     })
     .catch(err => console.log(err))
 
@@ -52,7 +51,7 @@ export default function ShopList({route, navigation}) {
             >
 
                 { data?.map((item, index) =>{  
-                  return <EachShop key={index} SName={item.SName} category={item.category} SImg={item.SImg} deliPrice="800" navigation={navigation} item={item}/>
+                  return <EachShop key={index} SName={item.SName} category={item.category} SImg={item.SImg} deliPrice="800" navigation={navigation} item={item} userQuarter={userQuarter}/>
                 })}
 
                 {/* loading */}

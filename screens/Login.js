@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import {View, Text, TextInput, Alert, ImageBackground} from 'react-native'
 import CustomButton from '../components/CustomButton'
 import { Gstyles } from '../share/Gstyle'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../contexts/AuthContext'
 
 export default function Login({navigation}) {

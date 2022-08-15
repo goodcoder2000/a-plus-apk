@@ -10,16 +10,16 @@ import { AuthContext } from '../contexts/AuthContext';
 export default function Setting({route}) {
     const { profileUpdate} = useContext(AuthContext); // profile update
 
-    const { profileData } = route.params;
+    const { data } = route.params;
     const [QuarterModelShow, setQuarterModelShow] = useState(false)
 
-    const [ newName, setNewName] = useState(profileData.name)
-    const [ newPassword, setNewPassword] = useState(profileData.password)
-    const [ userId, setUserId] = useState(profileData._id);
-    const [ newQuarter, setNewQuarter] = useState(profileData.quarter)
-    const [ newPhoneNo, setNewphoneNo] = useState(profileData.phoneno)
-    const [ newHomeno, setNewHomeno] = useState(profileData.homeno)
-    const [ newStreetName, setNewStreetName] = useState(profileData.street)
+    const [ newName, setNewName] = useState(data.name)
+    const [ newPassword, setNewPassword] = useState(data.password)
+    const [ userId, setUserId] = useState(data._id);
+    const [ newQuarter, setNewQuarter] = useState(data.quarter)
+    const [ newPhoneNo, setNewphoneNo] = useState(data.phoneno)
+    const [ newHomeno, setNewHomeno] = useState(data.homeno)
+    const [ newStreetName, setNewStreetName] = useState(data.street)
 
     const quarterData = [
         {name: "ကချင်စု"},
@@ -44,13 +44,13 @@ export default function Setting({route}) {
         {name: "မြို့သစ်ကြီး"},
         {name: "မင်းရပ်"}
       ];   
-      
-    const updateData = {name: newName, password: newPassword, quarter: newQuarter, phoneno: newPhoneNo, homeno: newHomeno, street: newStreetName}
+    
+    const updateDataWithIdForAsyncStorage  = {name: newName, password: newPassword, _id: userId, quarter: newQuarter, phoneno: newPhoneNo, homeno: newHomeno, street: newStreetName}
+    const updateDataWithoutId = {name: newName, password: newPassword, quarter: newQuarter, phoneno: newPhoneNo, homeno: newHomeno, street: newStreetName}
 
   return (
     <View style={Gstyles.settingCon}>
         <Text style={Gstyles.profiletitle}>Setting</Text>
-        {/* {console.log('setting data', profileData)} */}
         <TextInput
         style={Gstyles.phoneNo}
         placeholder="Enter new name"
@@ -129,7 +129,7 @@ export default function Setting({route}) {
 
         <CustomButton title="Update Profile" color="red"
         icon={<MaterialIcons name="update" size={24} color="black" />}
-        press = {()=> profileUpdate(updateData)}
+        press = {()=> profileUpdate(updateDataWithIdForAsyncStorage,updateDataWithoutId)}
         />
 
     </View>

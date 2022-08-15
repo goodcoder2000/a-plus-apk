@@ -41,6 +41,7 @@ function HomeScreen(){
         
         <Tab.Screen name="Home" component={Home}
             options={{
+                unmountOnBlur: true,
                 tabBarLabel: () =>false,
                 tabBarLabelStyle: {
                     color: "#102A68"
@@ -68,9 +69,7 @@ function HomeScreen(){
             />
             <Tab.Screen name="Profile" component={Profile}
             options={
-                
                 {
-                unmountOnBlur: true,
                 tabBarLabel: () =>false,
                 tabBarLabelStyle: {
                     color: "#102A68"

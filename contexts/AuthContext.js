@@ -69,7 +69,6 @@ const AuthProvider = ({children}) => {
         })
         .then(data => {
           if(data.error !== "user not found"){
-            setUserData(data)
             setLogined(true)
             AsyncStorage.setItem("userData", JSON.stringify(data.user))
           }
@@ -89,9 +88,6 @@ const AuthProvider = ({children}) => {
         .then(value =>{
           if(value !== null){
             setLogined(true)
-            // const toOriginal = JSON.parse(value);
-            // const data = {phoneno: toOriginal.phoneno, password: toOriginal.password}
-            // Login(data)
           }
         })
       } catch (error) {
@@ -122,11 +118,10 @@ const AuthProvider = ({children}) => {
       await AsyncStorage.getItem("userData")
       .then(value =>{
         if(value !== null){
-          let userId = JSON.parse(value)._id;
-          setUserId(userId)
-          let userQuarter = JSON.parse(value).quarter;
-          console.log("user quarter is", userQuarter)
-          setUserQuarter(userQuarter)
+          let userData = JSON.parse(value);
+          setUserData(userData)
+          setUserId(userData._id);
+          setUserQuarter(userData.quarter)
         }
       })
   }
@@ -204,12 +199,13 @@ const AuthProvider = ({children}) => {
 
   // profile update
 
-  const profileUpdate = (updateData) =>{
+  const profileUpdate = (updateDataWithIdForAsyncStorage, updateDataWithoutId) =>{
+    console.log("updateDatawithIdfor asyncstroage", updateDataWithIdForAsyncStorage, "updateDatawithoutId", updateDataWithoutId)
     try {
       fetch("https://api-aplus.onrender.com/api/users/"+UserId+"/profileUpdate",{
       method: 'PATCH',
       headers: {"content-type": "application/json"},
-      body: JSON.stringify(updateData)
+      body: JSON.stringify(updateDataWithoutId)
       })
       .then(res => res.json())
       .then(data =>{
@@ -217,15 +213,14 @@ const AuthProvider = ({children}) => {
           // Alert.alert("APlUS FOOD Say!!!", "Profile Update Successfully!",[
           //   {text: "သိပြီ", onPress: () => null}
           // ])
-          // AsyncStorage.setItem("userData", JSON.stringify(updateData))
-          // console.log("hee data",updateData)
+          AsyncStorage.setItem("userData", JSON.stringify(updateDataWithIdForAsyncStorage))
+          console.log("hee data",updateDataWithoutId)
           console.log("profile update success")
         }
       })
     } catch (error) {
       console.log(error)
     }
-    console.log("data update is", updateData, "user id", UserId)
   }
 
   return (
@@ -247,10 +242,10 @@ const AuthProvider = ({children}) => {
         OrderClick,
         OrderComformed,
         profileUpdate,
-        userQuarter
+        userQuarter,
+        userData
     }}
     >
-      {console.log(orderData)}
         {children}
     </AuthContext.Provider>
   )
