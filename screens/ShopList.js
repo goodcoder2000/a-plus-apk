@@ -10,7 +10,8 @@ export default function ShopList({route, navigation}) {
   const {category} = route.params;
 
   const [data, setData] = useState(null);
-  const [ padding, setPadding] = useState(true)
+  const [ padding, setPadding] = useState(true);
+  const [ deliprice, setDeliprice] = useState('')
 
   const ShopListApiCall = (category) =>{
     useEffect(() =>{
@@ -35,6 +36,7 @@ export default function ShopList({route, navigation}) {
   }
   ShopListApiCall(category)
 
+
   return (
     <View style={Gstyles.shopListContainer}>
         <Text style={Gstyles.shopHeader}>
@@ -51,7 +53,7 @@ export default function ShopList({route, navigation}) {
             >
 
                 { data?.map((item, index) =>{  
-                  return <EachShop key={index} SName={item.SName} category={item.category} SImg={item.SImg} deliPrice="800" navigation={navigation} item={item} userQuarter={userQuarter}/>
+                  return <EachShop key={index} SName={item.SName} category={item.category} SImg={item.SImg} navigation={navigation} item={item} userQuarter={userQuarter}/>
                 })}
 
                 {/* loading */}

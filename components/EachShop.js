@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { Gstyles } from '../share/Gstyle'
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function EachShop({SName, category, deliPrice, SImg, navigation, item, userQuarter}) {
+export default function EachShop({SName, category, SImg, navigation, item, userQuarter}) {
+
+    // const [ deliprice, setDeliprice] = useState('');
+
+    let deliPrice;
+
+    if(userQuarter === item.location){
+        deliPrice = '800'
+    } if(userQuarter === "အေးစေတီ" && item.location === "ရှမ်းစုတောင်" || userQuarter === "အေးစေတီ" && item.location === "ရှမ်းစုမြောက်" || userQuarter === "အေးစေတီ" && item.location === "မင်းရပ်"){
+        deliPrice = '1000'
+    }
+
   return (
     <TouchableOpacity 
     onPress={ () => navigation.navigate('InShop',{shopData: item}) }
